@@ -849,19 +849,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\atulb\\.nuget\\packages\\": {}
+    "C:\\Users\\kanaka\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\MyGateAPI\\MyGateAPI\\MyGateAPI.csproj",
+      "projectUniqueName": "C:\\Users\\kanaka\\Desktop\\SSMS\\MyGateAPI\\MyGateAPI\\MyGateAPI.csproj",
       "projectName": "MyGateAPI",
-      "projectPath": "E:\\MyGateAPI\\MyGateAPI\\MyGateAPI.csproj",
-      "packagesPath": "C:\\Users\\atulb\\.nuget\\packages\\",
-      "outputPath": "E:\\MyGateAPI\\MyGateAPI\\obj\\",
+      "projectPath": "C:\\Users\\kanaka\\Desktop\\SSMS\\MyGateAPI\\MyGateAPI\\MyGateAPI.csproj",
+      "packagesPath": "C:\\Users\\kanaka\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kanaka\\Desktop\\SSMS\\MyGateAPI\\MyGateAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\atulb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kanaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -919,7 +919,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
