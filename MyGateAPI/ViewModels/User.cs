@@ -1,4 +1,4 @@
-﻿namespace MyGateAPI
+﻿namespace MyGateAPI.ViewModels
 {
     public class User
     {

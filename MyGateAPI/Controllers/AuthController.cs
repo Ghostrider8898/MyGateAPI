@@ -6,6 +6,8 @@ using MyGateAPI.Services.UserService;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using MyGateAPI.Models;
+using MyGateAPI.ViewModels;
 
 namespace MyGateAPI.Controllers
 {
@@ -16,6 +18,7 @@ namespace MyGateAPI.Controllers
         public static User user = new User();
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
+        MyGateApidbContext _context = new MyGateApidbContext();
 
         public AuthController(IConfiguration configuration, IUserService userService)
         {
@@ -31,28 +34,70 @@ namespace MyGateAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register([FromBody]UserDto request)
+        public async Task<ActionResult<User>> Register([FromBody] UserDto request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            UserProfile newUser = new UserProfile();
+            newUser.Username = request.Username;
+            newUser.Password = request.Password;
+            newUser.Email = request.email;
+            newUser.FirstName = request.firstName;
+            newUser.LastName = request.lastName;
+            newUser.Contact = request.Contact;
+            newUser.AadharCardNo = request.AadharCardNo;
+            newUser.Gender = request.Gender;
+            newUser.RoleId = request.RoleId;
 
-            user.Username = request.Username;   
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+            _context.UserProfiles.Add(newUser);
+            _context.SaveChanges();
 
+            if (request.RoleId == 2)
+            {
+                FlatOwner flatOwner = new FlatOwner();
+                flatOwner.FlatNo = request.FlatNo;
+                flatOwner.NoOfSeniorCitizen = request.NoOfSeniorCitizen;
+                flatOwner.NoOfPets = request.NoOfPets;
+                flatOwner.UserId = newUser.UserId;
+                _context.FlatOwners.Add(flatOwner);
+            }
+            else if (request.RoleId == 3)
+            {
+                Staff staff = new Staff();
+                staff.Shift = request.Shift;
+                staff.FlatNo = request.FlatNo;
+                staff.UserId = newUser.UserId;
+                _context.Staff.Add(staff);
+            }
+            else if(request.RoleId == 4)
+            {
+                Visitor visitor = new Visitor();
+                visitor.InTime=request.InTime;
+                visitor.OutTime=request.OutTime;
+                visitor.FlatNo=request.FlatNo;
+                visitor.PurposeOfVisit=request.PurposeOfVisit;
+                visitor.UserId=newUser.UserId;
+                visitor.VehicleNo=request.VehicleNo;
+                _context.Visitors.Add(visitor);
+            }
+            else if( request.RoleId == 7)
+            {
+                SecurityGuard guard = new SecurityGuard();
+                guard.Shift= request.Shift;
+                guard.Address= request.Address;
+                guard.UserId= newUser.UserId;
+                _context.SecurityGuards.Add(guard);
+            }
+            _context.SaveChanges();
             return Ok(user);
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login([FromBody] Login request)
         {
-            if (user.Username != request.userName)
+            var loginUser = _context.UserProfiles.Where(user => user.Username == request.userName);
+            if(loginUser==null)
             {
                 return BadRequest("User not found.");
-            }
-
-            if (!VerifyPasswordHash(request.password, user.PasswordHash, user.PasswordSalt))
-            {
-                return BadRequest("Wrong password.");
             }
 
             string token = CreateToken(user);

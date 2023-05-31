@@ -1,7 +1,9 @@
 global using MyGateAPI.Services.UserService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MyGateAPI.Models;
 using MyGateAPI.Services.UserService;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
@@ -15,6 +17,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddHttpContextAccessor();
+//inject dbcontext
+builder.Services.AddDbContext<MyGateApidbContext>();
+builder.Services.AddDbContext<MyGateApidbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyGateAPIDBConnection"))
+);
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
