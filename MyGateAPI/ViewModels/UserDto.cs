@@ -7,22 +7,23 @@ namespace MyGateAPI.ViewModels
         public string firstName { get; set; } = string.Empty;
         public string lastName { get; set; } = string.Empty;
         public string email { get; set; } = string.Empty;
-        public string Username { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public int UserId { get; set; }
-        public string Contact { get; set; } = string.Empty;
-        public string AadharCardNo { get; set; } = string.Empty;
-        public string Gender { get; set; } = string.Empty;
-        public int FlatNo { get; set; } = 0;
-        public int NoOfSeniorCitizen { get; set; } = 0;
-        public int NoOfPets { get; set; } = 0;
-        public string Shift { get; set; } = string.Empty;
-        public DateTimeOffset? InTime { get; set; } 
-        public DateTimeOffset? OutTime { get; set; }
-        public string PurposeOfVisit { get; set; } = string.Empty;
-        public string VehicleNo { get; set; } = string.Empty;//for Visitor
-        public string Address { get; set; }=string.Empty;// for security guard
-        public int RoleId { get; set; }
+        public string username { get; set; } = string.Empty;
+        public string password { get; set; } = string.Empty;
+        public int userId { get; set; }
+        public string phoneNumber { get; set; } = string.Empty;
+        public string aadharCardNo { get; set; } = string.Empty;
+        public string gender { get; set; } = string.Empty;
+        public string flatNumber { get; set; }
+        public string flatNumberforStaff { get; set; }
+        public string flatNoForPass { get; set; }
+        public string SCitizens { get; set; } 
+        public string pets { get; set; } 
+        public string shift { get; set; } = string.Empty;
+        public string inTime { get; set; } 
+        public string outTime { get; set; }
+        public string visitingPurpose { get; set; } = string.Empty;
+        public string vehicleNo { get; set; } = string.Empty;//for Visitor
+        public int userType { get; set; }
 
     }
 }

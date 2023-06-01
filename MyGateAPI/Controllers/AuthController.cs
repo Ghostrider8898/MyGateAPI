@@ -36,54 +36,53 @@ namespace MyGateAPI.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register([FromBody] UserDto request)
         {
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            CreatePasswordHash(request.password, out byte[] passwordHash, out byte[] passwordSalt);
             UserProfile newUser = new UserProfile();
-            newUser.Username = request.Username;
-            newUser.Password = request.Password;
+            newUser.Username = request.username;
+            newUser.Password = request.password;
             newUser.Email = request.email;
             newUser.FirstName = request.firstName;
             newUser.LastName = request.lastName;
-            newUser.Contact = request.Contact;
-            newUser.AadharCardNo = request.AadharCardNo;
-            newUser.Gender = request.Gender;
-            newUser.RoleId = request.RoleId;
+            newUser.Contact = request.phoneNumber;
+            newUser.AadharCardNo = request.aadharCardNo;
+            newUser.Gender = request.gender;
+            newUser.RoleId = request.userType;
 
             _context.UserProfiles.Add(newUser);
             _context.SaveChanges();
 
-            if (request.RoleId == 2)
+            if (request.userType == 2)
             {
                 FlatOwner flatOwner = new FlatOwner();
-                flatOwner.FlatNo = request.FlatNo;
-                flatOwner.NoOfSeniorCitizen = request.NoOfSeniorCitizen;
-                flatOwner.NoOfPets = request.NoOfPets;
+                flatOwner.FlatNo = Convert.ToInt32(request.flatNumber);
+                flatOwner.NoOfSeniorCitizen = Convert.ToInt32(request.SCitizens);
+                flatOwner.NoOfPets = int.Parse(request.pets);
                 flatOwner.UserId = newUser.UserId;
                 _context.FlatOwners.Add(flatOwner);
             }
-            else if (request.RoleId == 3)
+            else if (request.userType == 3)
             {
                 Staff staff = new Staff();
-                staff.Shift = request.Shift;
-                staff.FlatNo = request.FlatNo;
+                staff.Shift = request.shift;
+                staff.FlatNo = int.Parse(request.flatNumberforStaff);
                 staff.UserId = newUser.UserId;
                 _context.Staff.Add(staff);
             }
-            else if(request.RoleId == 4)
+            else if(request.userType == 4)
             {
                 Visitor visitor = new Visitor();
-                visitor.InTime=request.InTime;
-                visitor.OutTime=request.OutTime;
-                visitor.FlatNo=request.FlatNo;
-                visitor.PurposeOfVisit=request.PurposeOfVisit;
+                visitor.InTime=DateTimeOffset.Parse(request.inTime);
+                visitor.OutTime= DateTimeOffset.Parse(request.outTime);
+                visitor.FlatNo = int.Parse(request.flatNumber);
+                visitor.PurposeOfVisit=request.visitingPurpose;
                 visitor.UserId=newUser.UserId;
-                visitor.VehicleNo=request.VehicleNo;
+                visitor.VehicleNo=request.vehicleNo;
                 _context.Visitors.Add(visitor);
             }
-            else if( request.RoleId == 7)
+            else if( request.userType == 7)
             {
                 SecurityGuard guard = new SecurityGuard();
-                guard.Shift= request.Shift;
-                guard.Address= request.Address;
+                guard.Shift= request.shift;
                 guard.UserId= newUser.UserId;
                 _context.SecurityGuards.Add(guard);
             }
