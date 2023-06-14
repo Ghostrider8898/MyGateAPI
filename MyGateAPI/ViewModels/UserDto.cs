@@ -13,12 +13,12 @@ namespace MyGateAPI.ViewModels
         public string phoneNumber { get; set; } = string.Empty;
         public string aadharCardNo { get; set; } = string.Empty;
         public string gender { get; set; } = string.Empty;
-        public string flatNumber { get; set; }
+        public string FlatNoForPass { get; set; }
         public string flatNumberforStaff { get; set; }
-        public string flatNoForPass { get; set; }
+        public string flatNoForVisitor { get; set; }
         public string SCitizens { get; set; } 
         public string pets { get; set; } 
-        public string shift { get; set; } = string.Empty;
+        public string staffShift { get; set; } = string.Empty;
         public string inTime { get; set; } 
         public string outTime { get; set; }
         public string visitingPurpose { get; set; } = string.Empty;
