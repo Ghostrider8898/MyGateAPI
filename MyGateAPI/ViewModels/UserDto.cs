@@ -13,6 +13,7 @@ namespace MyGateAPI.ViewModels
         public string phoneNumber { get; set; } = string.Empty;
         public string aadharCardNo { get; set; } = string.Empty;
         public string gender { get; set; } = string.Empty;
+        public string flatNumber { get; set; } = string.Empty;
         public string FlatNoForPass { get; set; }
         public string flatNumberforStaff { get; set; }
         public string flatNoForVisitor { get; set; }

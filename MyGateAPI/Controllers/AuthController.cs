@@ -63,7 +63,7 @@ namespace MyGateAPI.Controllers
             else if (request.userType == 3)
             {
                 Staff staff = new Staff();
-                staff.Shift = request.shift;
+                staff.Shift = request.staffShift;
                 staff.FlatNo = int.Parse(request.flatNumberforStaff);
                 staff.UserId = newUser.UserId;
                 _context.Staff.Add(staff);
@@ -82,7 +82,7 @@ namespace MyGateAPI.Controllers
             else if( request.userType == 7)
             {
                 SecurityGuard guard = new SecurityGuard();
-                guard.Shift= request.shift;
+                guard.Shift= request.staffShift;
                 guard.UserId= newUser.UserId;
                 _context.SecurityGuards.Add(guard);
             }

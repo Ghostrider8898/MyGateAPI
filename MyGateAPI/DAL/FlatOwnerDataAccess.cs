@@ -16,6 +16,7 @@ namespace MyGateAPI.DAL
                                                            FlatOwnerID=f.FlatOwnerId,
                                                            firstName = ua.FirstName,
                                                            lastName = ua.LastName,
+                                                           fullName = ua.FirstName + " " + ua.LastName,
                                                            phoneNumber = ua.Contact,
                                                            email = ua.Email,
                                                            aadharCardNo = ua.AadharCardNo,
